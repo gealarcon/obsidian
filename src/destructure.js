@@ -13,6 +13,30 @@
  */
 // this function will destructure a query/mutation operation string into a query/mutation operation object
 export function destructureQueries(queryOperationStr) {
+  console.log(queryOperationStr)
+  console.log("---------------")
+
+  let fragments = []
+
+  let queryCopy = queryOperationStr
+
+  // find fragment in string
+  if(queryOperationStr.indexOf('fragment') !== -1){
+    let fragmentIndex = queryOperationStr.indexOf('fragment')
+  
+    //reassign queryOperationStr to everything but the fragment
+    queryOperationStr = queryOperationStr.substring(0,fragmentIndex)
+
+    // get rid of "..."
+
+
+    console.log('INSIDE IF STATEMENT')
+    console.log(queryOperationStr)
+    console.log("---------------")
+
+    
+  }
+
   // ignore operation name by finding the beginning of the query strings
   const startIndex = queryOperationStr.indexOf('{');
   const queryStrings = queryOperationStr.substring(startIndex).trim();
@@ -25,6 +49,11 @@ export function destructureQueries(queryOperationStr) {
       : 'queries';
   // create a queries object from array of query strings
   const queriesObj = createQueriesObj(arrayOfQueryStrings, typePropName);
+
+
+  console.log(queriesObj)
+
+  console.log(queriesObj.queries)
   return queriesObj;
 }
 

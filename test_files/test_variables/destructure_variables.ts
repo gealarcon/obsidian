@@ -218,4 +218,43 @@ export const test = {
   }`,
 
   findClosingBraceResultData: 90,
+
+
+  testFragments: `
+  query AllActionMovies {
+    movies(input: { genre: ACTION }) {
+      __typename
+      id
+      title
+      genre
+      actors
+    }
+    actors
+  }
+  
+  fragment actorsFragment on actors{
+    id
+    firstName
+    lastName
+}`,
+
+  testFragmentsResults: {
+    queries: [
+      {
+        name: 'movies',
+        arguments: '(input:{genre:ACTION})',
+        fields: {
+          __typename: 'meta',
+          id: 'scalar',
+          title: 'scalar',
+          genre: 'scalar',
+          actors: {
+            id: 'scalar',
+            firstName: 'scalar',
+            lastName: 'scalar',
+          },
+        },
+      },
+    ],
+  },
 };
